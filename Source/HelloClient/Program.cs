@@ -29,14 +29,28 @@ namespace HelloClient
             model.CreateDurableDirectExcange(ExchangeName);
             model.QueueBind(QueueName, ExchangeName, string.Empty);
 
+            while (true)
+            {
+                Console.WriteLine("Press ESC to exit or Any Key to send a message");
+
+                var key = Console.ReadKey();
+                if (key.Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
+                SendMessage(model, Guid.NewGuid().ToString());
+            }
+
+            model.Close();
+        }
+
+        private static void SendMessage(IModel model, string message)
+        {
             var properties = model.CreateBasicProperties();
             properties.SetPersistent(true);
-
-            var messageData = Encoding.Default.GetBytes("Test message");
-
+            var messageData = Encoding.Default.GetBytes(message);
             model.BasicPublish(ExchangeName, string.Empty, properties, messageData);
-
-            Console.WriteLine("Done");
+            Console.WriteLine("Message {0}, was sent", message);
         }
     }
 }

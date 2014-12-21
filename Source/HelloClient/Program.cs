@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Core.Extensions;
+using Nelibur.Sword.Extensions;
 using RabbitMQ.Client;
 
 namespace HelloClient
@@ -38,7 +39,7 @@ namespace HelloClient
                 {
                     break;
                 }
-                SendMessage(model, Guid.NewGuid().ToString());
+                10.Times().Iter(x => SendMessage(model, Guid.NewGuid().ToString()));
             }
 
             model.Close();

@@ -8,11 +8,11 @@ namespace HelloClient
 {
     internal class Program
     {
+        private const string ExchangeName = "HelloExchange";
         private const string HostName = "localhost";
         private const string Password = "guest";
-        private const string UserName = "guest";
         private const string QueueName = "HelloQueue";
-        private const string ExchangeName = "HelloExchange";
+        private const string UserName = "guest";
 
         private static void Main()
         {
@@ -23,7 +23,7 @@ namespace HelloClient
                 UserName = UserName
             };
 
-            var connection = connectionFactory.CreateConnection();
+            IConnection connection = connectionFactory.CreateConnection();
             IModel model = connection.CreateModel();
 
             model.CreateDurableQueue(QueueName);
@@ -34,7 +34,7 @@ namespace HelloClient
             {
                 Console.WriteLine("Press ESC to exit or Any Key to send a message");
 
-                var key = Console.ReadKey();
+                ConsoleKeyInfo key = Console.ReadKey();
                 if (key.Key == ConsoleKey.Escape)
                 {
                     break;
@@ -47,9 +47,9 @@ namespace HelloClient
 
         private static void SendMessage(IModel model, string message)
         {
-            var properties = model.CreateBasicProperties();
+            IBasicProperties properties = model.CreateBasicProperties();
             properties.SetPersistent(true);
-            var messageData = Encoding.Default.GetBytes(message);
+            byte[] messageData = Encoding.Default.GetBytes(message);
             model.BasicPublish(ExchangeName, string.Empty, properties, messageData);
             Console.WriteLine("Message {0}, was sent", message);
         }

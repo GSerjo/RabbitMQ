@@ -21,7 +21,8 @@ namespace TaskService
             request.ToOption()
                    .Map(JsonConvert.SerializeObject)
                    .Map(Encoding.Default.GetBytes)
-                   .Do(Enqueue);
+                   .Do(Enqueue)
+                   .Do(x => Console.WriteLine("Task: {0} processed", request.Id));
         }
 
         private void Enqueue(byte[] message)

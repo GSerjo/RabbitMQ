@@ -39,7 +39,7 @@ namespace HelloClient
                 {
                     break;
                 }
-                10.Times().Iter(x => SendMessage(model, Guid.NewGuid().ToString()));
+                100000.Times().Iter(x => SendMessage(model, Guid.NewGuid().ToString()));
             }
 
             model.Close();

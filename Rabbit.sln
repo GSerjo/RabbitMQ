@@ -1,8 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HelloWorld", "HelloWorld", "{F7475553-86C7-463C-8976-073BD9CDB67A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloClient", "Source\HelloClient\HelloClient.csproj", "{0349C1A4-E20A-4A38-B1A7-622A189B09A5}"
@@ -18,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskContracts", "Source\TaskContracts\TaskContracts.csproj", "{3B2521CD-91AA-4D0E-A728-D6104BCDE7E0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskService", "Source\TaskService\TaskService.csproj", "{CE61202C-F44D-4E82-BA81-E24DA7EBA9D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HelloContracts", "Source\HelloContracts\HelloContracts.csproj", "{148986FE-CED6-4C1B-B0F3-D98EA2708395}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +49,10 @@ Global
 		{CE61202C-F44D-4E82-BA81-E24DA7EBA9D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE61202C-F44D-4E82-BA81-E24DA7EBA9D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE61202C-F44D-4E82-BA81-E24DA7EBA9D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{148986FE-CED6-4C1B-B0F3-D98EA2708395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{148986FE-CED6-4C1B-B0F3-D98EA2708395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{148986FE-CED6-4C1B-B0F3-D98EA2708395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{148986FE-CED6-4C1B-B0F3-D98EA2708395}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +60,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{0349C1A4-E20A-4A38-B1A7-622A189B09A5} = {F7475553-86C7-463C-8976-073BD9CDB67A}
 		{F0E75B08-FEC8-4B74-92B8-C88767B8FAC6} = {F7475553-86C7-463C-8976-073BD9CDB67A}
+		{148986FE-CED6-4C1B-B0F3-D98EA2708395} = {F7475553-86C7-463C-8976-073BD9CDB67A}
 		{EF683AB2-2542-40B9-838A-010170496B89} = {9EB47553-134B-4463-B469-CF28E5CA6F63}
 		{3B2521CD-91AA-4D0E-A728-D6104BCDE7E0} = {9EB47553-134B-4463-B469-CF28E5CA6F63}
 		{CE61202C-F44D-4E82-BA81-E24DA7EBA9D5} = {9EB47553-134B-4463-B469-CF28E5CA6F63}

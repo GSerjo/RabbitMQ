@@ -9,7 +9,7 @@ using RabbitMQ.Client.Events;
 
 namespace Core.RabbitMQClients
 {
-    public sealed class RabbitMQClient : IRabbitMQClient
+    public sealed class RabbitMQClient : IDisposable
     {
         private readonly IConnection connection;
 
@@ -24,14 +24,14 @@ namespace Core.RabbitMQClients
             connection = connectionFactory.CreateConnection();
         }
 
-        public static IRabbitMQClientConfig Configure(Action<IRabbitMQClientConfig> action)
-        {
-            return new RabbitMQClientConfig().Config(action);
-        }
-
         public void Dispose()
         {
             connection.Dispose();
+        }
+
+        public static IRabbitMQClientConfig Configure(Action<IRabbitMQClientConfig> action)
+        {
+            return new RabbitMQClientConfig().Config(action);
         }
 
         public void ClearQueue(string queueName)
@@ -102,6 +102,7 @@ namespace Core.RabbitMQClients
             }
         }
 
+
         private sealed class Consumer<T> : IConsumerMQ<T>
         {
             private readonly QueueingBasicConsumer consumer;
@@ -138,6 +139,7 @@ namespace Core.RabbitMQClients
                 model.BasicReject(item.Id, true);
             }
         }
+
 
         private sealed class Producer<T> : IProducerMQ<T>
         {
@@ -185,22 +187,23 @@ namespace Core.RabbitMQClients
             }
         }
 
+
         private class RabbitMQClientConfig : IRabbitMQClientConfig
         {
             public string HostName { get; set; }
             public string Password { get; set; }
             public string UserName { get; set; }
 
+            public RabbitMQClient Create()
+            {
+                Validate();
+                return new RabbitMQClient(this);
+            }
+
             public IRabbitMQClientConfig Config(Action<IRabbitMQClientConfig> action)
             {
                 action(this);
                 return this;
-            }
-
-            public IRabbitMQClient Create()
-            {
-                Validate();
-                return new RabbitMQClient(this);
             }
 
             private void Validate()

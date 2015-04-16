@@ -52,7 +52,6 @@
     <Compile Include="RabbitMQClients\IConsumerMQ.cs" />
     <Compile Include="RabbitMQClients\IProducerMQ.cs" />
     <Compile Include="RabbitMQClients\IQueueItem.cs" />
-    <Compile Include="RabbitMQClients\IRabbitMQClient.cs" />
     <Compile Include="RabbitMQClients\IRabbitMQClientConfig.cs" />
     <Compile Include="RabbitMQClients\QueueItem.cs" />
     <Compile Include="RabbitMQClients\RabbitMQClient.cs" />

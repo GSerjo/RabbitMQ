@@ -7,6 +7,6 @@ namespace Core.RabbitMQClients
         string HostName { get; set; }
         string Password { get; set; }
         string UserName { get; set; }
-        IRabbitMQClient Create();
+        RabbitMQClient Create();
     }
 }

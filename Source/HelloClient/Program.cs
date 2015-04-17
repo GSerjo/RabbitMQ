@@ -20,6 +20,12 @@ namespace HelloClient
 
         private static void Main()
         {
+            //            Send1();
+            Send2();
+        }
+
+        private static void Send1()
+        {
             var connectionFactory = new ConnectionFactory
             {
                 HostName = HostName,
@@ -34,6 +40,22 @@ namespace HelloClient
             model.CreateDurableDirectExcange(ExchangeName);
             model.QueueBind(QueueName, ExchangeName, string.Empty);
 
+            while (true)
+            {
+                Console.WriteLine("Press ESC to exit or Any Key to send a message");
+
+                ConsoleKeyInfo key = Console.ReadKey();
+                if (key.Key == ConsoleKey.Escape)
+                {
+                    break;
+                }
+                100000.Times().Iter(x => SendMessage(model, x));
+            }
+            model.Close();
+        }
+
+        private static void Send2()
+        {
             RabbitMQClient rabbitClient = RabbitMQClient.Configure(x =>
             {
                 x.HostName = HostName;
@@ -53,10 +75,7 @@ namespace HelloClient
                     break;
                 }
                 100000.Times().Iter(x => SendMessage(x));
-                //                100000.Times().Iter(x => SendMessage(model, Guid.NewGuid().ToString()));
             }
-
-            model.Close();
         }
 
         private static void SendMessage(int messageIndex)
@@ -65,13 +84,17 @@ namespace HelloClient
             Console.WriteLine("Message {0}, was sent", messageIndex);
         }
 
-        //        private static void SendMessage(IModel model, string message)
-        //        {
-        //            IBasicProperties properties = model.CreateBasicProperties();
-        //            properties.SetPersistent(true);
-        //            byte[] messageData = Encoding.Default.GetBytes(message);
-        //            model.BasicPublish(ExchangeName, string.Empty, properties, messageData);
-        //            Console.WriteLine("Message {0}, was sent", message);
-        //        }
+        private static void SendMessage(IModel model, int messageIndex)
+        {
+            var data = new Data
+            {
+                Id = Guid.NewGuid()
+            };
+
+            IBasicProperties properties = model.CreateBasicProperties();
+            properties.SetPersistent(true);
+            model.BasicPublish(ExchangeName, string.Empty, properties, _dataSerializer.ToProto(data).Value);
+            Console.WriteLine("Message {0}, was sent", messageIndex);
+        }
     }
 }

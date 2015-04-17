@@ -146,6 +146,7 @@ namespace Core.RabbitMQClients
             private readonly IConnection connection;
             private readonly Func<T, Option<byte[]>> dataConverter;
             private readonly string exchangeName;
+            private readonly IModel model;
 
             public Producer(string exchangeName, IConnection connection, Func<T, Option<byte[]>> dataConverter)
             {
@@ -157,6 +158,7 @@ namespace Core.RabbitMQClients
                 this.connection = connection;
                 this.dataConverter = dataConverter;
                 this.exchangeName = exchangeName;
+                model = connection.CreateModel();
             }
 
             public void EnqueueNonPersistent(T item)
@@ -178,12 +180,9 @@ namespace Core.RabbitMQClients
 
             private void Publish(byte[] message, bool setMessagePersistent)
             {
-                using (IModel model = connection.CreateModel())
-                {
-                    IBasicProperties properties = model.CreateBasicProperties();
-                    properties.SetPersistent(setMessagePersistent);
-                    model.BasicPublish(exchangeName, string.Empty, properties, message);
-                }
+                IBasicProperties properties = model.CreateBasicProperties();
+                properties.SetPersistent(setMessagePersistent);
+                model.BasicPublish(exchangeName, string.Empty, properties, message);
             }
         }
 

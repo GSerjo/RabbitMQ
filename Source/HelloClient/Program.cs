@@ -31,6 +31,7 @@ namespace HelloClient
                 Id = request.Id
             };
             _producer.EnqueuePersistent(data);
+            Console.WriteLine("MessageId: {0}", request.Id);
         }
 
         private static void Main()

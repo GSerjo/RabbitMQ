@@ -8,6 +8,8 @@ namespace RequestSender
 {
     internal class Program
     {
+        private static readonly JsonServiceClient _client = new JsonServiceClient(Settings.Default.HelloAddress);
+
         private static void Main()
         {
             while (true)
@@ -19,16 +21,13 @@ namespace RequestSender
                 {
                     break;
                 }
-                10000.Times().Iter(x => SendMessage(x));
+                50000.Times().Iter(x => SendMessage(x));
             }
         }
 
         private static void SendMessage(int messageIndex)
         {
-            using (var client = new JsonServiceClient(Settings.Default.HelloAddress))
-            {
-                client.Post(new DataRequest { Id = Guid.NewGuid()});
-            }
+            _client.Post(new DataRequest { Id = Guid.NewGuid() });
             Console.WriteLine("MessageIndex: {0}", messageIndex);
         }
     }

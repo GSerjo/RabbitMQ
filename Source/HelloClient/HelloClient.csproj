@@ -32,8 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Nelibur.Sword">
-      <HintPath>..\..\packages\Nelibur.Sword.3.1.0\lib\net45\Nelibur.Sword.dll</HintPath>
+    <Reference Include="Nelibur, Version=3.0.3.216, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nelibur.3.1.2\lib\net45\Nelibur.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nelibur.Sword, Version=3.0.3.216, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nelibur.Sword.3.1.2\lib\net45\Nelibur.Sword.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="RabbitMQ.Client, Version=3.5.1.0, Culture=neutral, PublicKeyToken=89e7d7c5feba84ce, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -41,6 +46,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
